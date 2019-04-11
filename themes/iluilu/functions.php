@@ -10,3 +10,21 @@ function university_files()
     wp_enqueue_style('styleCSS', get_stylesheet_uri(), null, microtime());
 }
 add_action('wp_enqueue_scripts', 'university_files');
+
+function iluilu_post_types()
+{
+    register_post_type('slider', array(
+        'public' => true,
+
+        'labels' => array(
+            'name' => 'Slider',
+            'add_new_item' => 'Dodaj nowy slider',
+            'edit_item' => 'Edytuj slider', //gdy wejdziemy do utworzonego wydarzenia to będziemy widzieć ten tytuł
+            'all_items' => 'Wszystkie sliders', //na pasku zmienia domyślne Wydarzenia na to co podajemy
+            'singular_name' => 'Slider',
+        ),
+        'menu_icon' => 'dashicons-slides',
+    ));
+}
+
+add_action('init', 'iluilu_post_types');
