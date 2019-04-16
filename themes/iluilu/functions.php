@@ -11,11 +11,21 @@ function university_files()
 }
 add_action('wp_enqueue_scripts', 'university_files');
 
+function university_title()
+{
+
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails'); //umożlowia nam wstawianie miniaturki obrazka
+}
+
+add_action('after_setup_theme', 'university_title');
+
+
 function iluilu_post_types()
 {
     register_post_type('slider', array(
         'public' => true,
-
+        'supports' => array('title', 'editor', 'excerpt', 'thumbnail'), //umożliwia nam utworzenie nowego pola zajawka (title i edytor są domyślne)
         'labels' => array(
             'name' => 'Slider',
             'add_new_item' => 'Dodaj nowy slider',

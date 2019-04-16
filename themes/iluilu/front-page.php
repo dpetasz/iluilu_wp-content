@@ -28,22 +28,28 @@ get_header();
 
 
 <main class="slider-container" role="slider">
+    <div class="slider">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <?php
+                $frontpageSlider = new WP_Query(array(
+                    'post_type' => 'slider',
+                    'order' => 'ASC',
+                ));
+                if ($frontpageSlider->have_posts()) : ?>
+                    <?php while ($frontpageSlider->have_posts()) : $frontpageSlider->the_post(); ?>
+                        <!-- <?php the_post_thumbnail() ?> -->
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title() ?>">
+                        </div>
 
-    <?php
-    $frontpageSlider = new WP_Query(array(
-        'post_type' => 'slider',
-        'order' => 'ASC',
-    ));
-    if ($frontpageSlider->have_posts()) : ?>
-        <?php while ($frontpageSlider->have_posts()) : $frontpageSlider->the_post(); ?>
-            <h3><?php the_title(); ?></h3>
-            <span><?php the_content() ?></span>
-        <?php endwhile; ?>
-    <?php else : ?>
-        <h1>Nie ma jeszcze sliders do wyświetlenia.</h1>
-    <?php endif; ?>
-
-
+                    <?php endwhile; ?>
+                <?php else : ?>
+                    <h1>Nie ma jeszcze sliders do wyświetlenia.</h1>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 
 </main>
 <section class="about">
